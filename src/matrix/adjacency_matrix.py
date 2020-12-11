@@ -1,5 +1,6 @@
 from graphs.graph import Graph
 from matrix.matrix import Matrix
+from math import inf
 
 
 class AdjacencyMatrix(Matrix):
@@ -36,4 +37,9 @@ class AdjacencyMatrix(Matrix):
 
     def fill(self, graph: Graph):
         for i in graph.get_edges(self.custom_vertex):
-            self.matrix[i[0]][i[1]] += 1
+            self.matrix[i[0]][i[1]] += i[2]
+
+        for i in range(self.n):
+            for j in range(self.m):
+                if i != j and self.matrix[i][j] == 0:
+                    self.matrix[i][j] = inf

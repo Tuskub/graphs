@@ -5,7 +5,7 @@ from typing import Set, Tuple
 @dataclass
 class Graph:
     num_vertices: int
-    edges: Set[Tuple[int, int]] = None
+    edges: Set[Tuple[int, int, int]] = None
     vertices: set = None
 
     def __post_init__(self):
@@ -63,15 +63,15 @@ class Graph:
             vertices=vertices
         )
 
-    def cartesian_product(self, other: 'Graph') -> 'Graph':
-        vertices = {(x, y) for x in self.vertices for y in other.vertices}
-        return Graph(
-            num_vertices=len(vertices),
-            edges=set(
-                (x, y) for x in vertices for y in vertices
-                if ((x[0] == y[0] and other.edges.__contains__((x[1], y[1]))) or
-                    (x[1] == y[1] and self.edges.__contains__((x[0], y[0])))) and
-                (x != y)
-            ),
-            vertices=vertices
-        )
+    # def cartesian_product(self, other: 'Graph') -> 'Graph':
+    #     vertices = {(x, y) for x in self.vertices for y in other.vertices}
+    #     return Graph(
+    #         num_vertices=len(vertices),
+    #         edges=set(
+    #             (x, y) for x in vertices for y in vertices
+    #             if ((x[0] == y[0] and other.edges.__contains__((x[1], y[1]))) or
+    #                 (x[1] == y[1] and self.edges.__contains__((x[0], y[0])))) and
+    #             (x != y)
+    #         ),
+    #         vertices=vertices
+    #     )
